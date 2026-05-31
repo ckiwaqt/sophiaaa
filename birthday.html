@@ -1,0 +1,278 @@
+<html lang="en"><head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Happy Birthday SOPHIA</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Poppins:wght@700&display=swap" rel="stylesheet">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.5/gsap.min.js"></script>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      overflow: hidden;
+      width: 100vw;
+      height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(135deg, #ff9a9e, #fad0c4, #fbc2eb, #f8a5c2, #ffb6c1);
+      background-size: 400% 400%;
+      animation: gradientBG 12s ease infinite;
+    }
+    @keyframes gradientBG {
+      0% { background-position: 0% 50%; }
+      25% { background-position: 50% 25%; }
+      50% { background-position: 100% 50%; }
+      75% { background-position: 50% 75%; }
+      100% { background-position: 0% 50%; }
+    }
+    .birthday-text {
+      font-family: 'Dancing Script', cursive;
+      font-size: 3.75rem;
+      font-weight: 700;
+      letter-spacing: 0.05em;
+      margin-bottom: 1.5rem;
+      text-align: center;
+      background: linear-gradient(90deg, #ff3d7f, #ff758c, #c2185b, #ff3d7f, #ff9a9e);
+      background-size: 200% auto;
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+      animation: shimmerText 4s linear infinite;
+      filter: drop-shadow(0 0 18px rgba(255, 61, 127, 0.7)) drop-shadow(0 0 40px rgba(255, 100, 150, 0.4));
+    }
+    @media (min-width: 768px) { .birthday-text { font-size: 6rem; } }
+    @keyframes shimmerText {
+      0% { background-position: 0% 50%; }
+      100% { background-position: 200% 50%; }
+    }
+    .birthday-text span {
+      opacity: 0;
+      transform: translateY(30px) rotate(10deg);
+      display: inline-block;
+      animation-fill-mode: forwards;
+    }
+    .birthday-subtitle {
+      font-family: 'Dancing Script', cursive;
+      font-size: 2rem;
+      font-weight: 700;
+      opacity: 0;
+      transform: translateY(20px);
+      text-align: center;
+      color: #ff3d7f;
+      text-shadow: 0 0 15px rgba(255, 61, 127, 0.6), 0 0 30px rgba(255, 61, 127, 0.4), 0 0 60px rgba(255, 61, 127, 0.2);
+      filter: drop-shadow(0 0 10px rgba(255, 61, 127, 0.5));
+    }
+    @media (min-width: 768px) { .birthday-subtitle { font-size: 2.5rem; } }
+    .birthday-container {
+      position: relative;
+      z-index: 10;
+      text-align: center;
+      padding: 2rem;
+      border-radius: 1.5rem;
+      animation: subtleBounce 3s infinite alternate ease-in-out;
+      margin-top: -80px;
+    }
+    @keyframes subtleBounce {
+      0% { transform: translateY(0); }
+      100% { transform: translateY(-10px); }
+    }
+    .floating-emoji {
+      position: absolute;
+      user-select: none;
+      animation: floatUp 8s linear forwards;
+      opacity: 0;
+      pointer-events: none;
+    }
+    @keyframes floatUp {
+      0% { opacity: 0; transform: translateY(100vh) rotate(0deg); }
+      10% { opacity: 1; }
+      90% { opacity: 1; }
+      100% { opacity: 0; transform: translateY(-50px) rotate(var(--rotate-val)); }
+    }
+    .confetti {
+      position: absolute;
+      animation: confettiFall 8s linear infinite;
+      pointer-events: none;
+    }
+    @keyframes confettiFall {
+      0% { transform: translateY(-50px) rotate(0deg); opacity: 1; }
+      85% { opacity: 1; }
+      100% { transform: translateY(100vh) rotate(360deg); opacity: 0; }
+    }
+    .glitter {
+      position: absolute;
+      border-radius: 50%;
+      animation: glitterAnim 4s linear infinite;
+      pointer-events: none;
+    }
+    @keyframes glitterAnim {
+      0%, 100% { opacity: 0; transform: scale(0.1); }
+      50% { opacity: 1; transform: scale(1); }
+    }
+    .firework { position: absolute; width: 6px; height: 6px; border-radius: 50%; pointer-events: none; }
+    .particle {
+      position: absolute;
+      width: 4px;
+      height: 4px;
+      border-radius: 50%;
+      animation: particleAnim 1.5s forwards cubic-bezier(0.25, 0.46, 0.45, 0.94);
+      pointer-events: none;
+    }
+    @keyframes particleAnim {
+      0% { transform: translate(0, 0) scale(1); opacity: 1; }
+      70% { opacity: 0.7; }
+      100% { transform: translate(var(--tx), var(--ty)) scale(0.1); opacity: 0; }
+    }
+    #emojis, #confettiContainer, #glitterContainer {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      top: 0;
+      left: 0;
+      pointer-events: none;
+    }
+  </style>
+</head>
+<body>
+  <audio id="bgMusic" loop autoplay><source src="life.mp3" type="audio/mpeg"></audio>
+
+  <div id="emojis"></div>
+  <div id="confettiContainer"></div>
+  <div id="glitterContainer"></div>
+
+  <div class="birthday-container">
+    <h1 class="birthday-text">Happy Birthday Sophia !!</h1>
+    <h2 class="birthday-subtitle">Have the best day ever! 𝟏𝟗 </h2>
+  </div>
+
+  <script>
+    // Animate title letter by letter
+    const titleEl = document.querySelector('.birthday-text');
+    const titleText = titleEl.textContent;
+    titleEl.textContent = '';
+    [...titleText].forEach((char) => {
+      const span = document.createElement('span');
+      span.textContent = char === ' ' ? '\u00A0' : char;
+      titleEl.appendChild(span);
+    });
+
+    const chars = document.querySelectorAll('.birthday-text span');
+    chars.forEach((char, i) => {
+      setTimeout(() => {
+        char.style.animation = `fadeInUp 0.7s ${i * 0.05}s cubic-bezier(0.17, 0.89, 0.32, 1.49) forwards`;
+      }, 200);
+    });
+
+    const totalTextDelay = 200 + chars.length * 50;
+    setTimeout(() => {
+      const subtitle = document.querySelector('.birthday-subtitle');
+      subtitle.style.transition = 'all 1.2s ease';
+      subtitle.style.opacity = '1';
+      subtitle.style.transform = 'translateY(0)';
+    }, totalTextDelay);
+
+    const celebrationEmojis = ['🎂', '🎁', '🎈', '🎊', '✨', '🎉', '🍰', '🥳', '🤩', '👑', '🍰', '🎀', '⭐', '🌟', '19'];
+    const emojiContainer = document.getElementById('emojis');
+    function createEmoji() {
+      const emoji = document.createElement('div');
+      emoji.classList.add('floating-emoji');
+      emoji.textContent = celebrationEmojis[Math.floor(Math.random() * celebrationEmojis.length)];
+      emoji.style.left = `${Math.random() * 100}%`;
+      emoji.style.fontSize = `${1 + Math.random() * 2}rem`;
+      emoji.style.setProperty('--rotate-val', `${-45 + Math.random() * 90}deg`);
+      const duration = 6 + Math.random() * 6;
+      emoji.style.animationDuration = `${duration}s`;
+      emojiContainer.appendChild(emoji);
+      setTimeout(() => emoji.remove(), duration * 1000);
+    }
+    setInterval(createEmoji, 600);
+
+    const confettiColors = ['#ff3d7f', '#ff758c', '#ff9a9e', '#fad0c4', '#fbc2eb', '#f8a5c2', '#ffb6c1', '#ff69b4', '#c2185b'];
+    const confettiContainer = document.getElementById('confettiContainer');
+    function createConfetti() {
+      const c = document.createElement('div');
+      c.classList.add('confetti');
+      c.style.width = `${5 + Math.random() * 10}px`;
+      c.style.height = `${5 + Math.random() * 10}px`;
+      c.style.left = `${Math.random() * 100}%`;
+      c.style.backgroundColor = confettiColors[Math.floor(Math.random() * confettiColors.length)];
+      const duration = 4 + Math.random() * 4;
+      const delay = Math.random() * 5;
+      c.style.animationDuration = `${duration}s`;
+      c.style.animationDelay = `${delay}s`;
+      c.style.transform = `rotate(${Math.random() * 360}deg)`;
+      confettiContainer.appendChild(c);
+      setTimeout(() => c.remove(), (duration + delay) * 1000);
+    }
+    for (let i = 0; i < 50; i++) setTimeout(createConfetti, i * 200);
+    setInterval(createConfetti, 300);
+
+    const glitterContainer = document.getElementById('glitterContainer');
+    function createGlitter() {
+      const g = document.createElement('div');
+      g.classList.add('glitter');
+      g.style.left = `${Math.random() * 100}%`;
+      g.style.top = `${Math.random() * 100}%`;
+      const size = 2 + Math.random() * 4;
+      g.style.width = `${size}px`;
+      g.style.height = `${size}px`;
+      const duration = 1 + Math.random() * 3;
+      const delay = Math.random() * 2;
+      g.style.animationDuration = `${duration}s`;
+      g.style.animationDelay = `${delay}s`;
+      const hue = 300 + Math.random() * 60;
+      g.style.backgroundColor = `hsl(${hue}, 100%, 80%)`;
+      g.style.boxShadow = `0 0 10px 2px hsl(${hue}, 100%, 70%)`;
+      glitterContainer.appendChild(g);
+      setTimeout(() => g.remove(), (duration + delay) * 1000 + 100);
+    }
+    setInterval(createGlitter, 200);
+
+    function createFirework() {
+      const fw = document.createElement('div');
+      fw.classList.add('firework');
+      fw.style.left = `${Math.random() * window.innerWidth}px`;
+      fw.style.top = `${Math.random() * window.innerHeight * 0.8}px`;
+      document.body.appendChild(fw);
+      const hue = 320 + Math.random() * 40;
+      const c1 = `hsl(${hue}, 100%, 70%)`;
+      const c2 = `hsl(${hue}, 100%, 50%)`;
+      for (let i = 0; i < 70; i++) {
+        const p = document.createElement('div');
+        p.classList.add('particle');
+        const angle = Math.random() * Math.PI * 2;
+        const dist = 30 + Math.random() * 150;
+        p.style.setProperty('--tx', `${Math.cos(angle) * dist}px`);
+        p.style.setProperty('--ty', `${Math.sin(angle) * dist}px`);
+        p.style.background = i % 3 === 0 ? c1 : i % 3 === 1 ? c2 : '#fff';
+        p.style.boxShadow = `0 0 8px ${i % 3 === 0 ? c1 : c2}`;
+        const ps = 1 + Math.random() * 4;
+        p.style.width = `${ps}px`;
+        p.style.height = `${ps}px`;
+        p.style.animationDuration = `${0.8 + Math.random() * 1.2}s`;
+        fw.appendChild(p);
+      }
+      setTimeout(() => fw.remove(), 1500);
+    }
+    setInterval(createFirework, 400);
+
+    function createBurst() {
+      for (let i = 0; i < 5; i++) setTimeout(createFirework, i * 200);
+      for (let i = 0; i < 8; i++) setTimeout(createEmoji, i * 100);
+    }
+    setInterval(createBurst, 5000);
+    createBurst();
+
+    const sheet = document.styleSheets[0];
+    sheet.insertRule(`
+      @keyframes fadeInUp {
+        0% { opacity: 0; transform: translateY(30px) rotate(10deg); }
+        70% { transform: translateY(-10px) rotate(-5deg); }
+        100% { opacity: 1; transform: translateY(0) rotate(0); }
+      }
+    `, sheet.cssRules.length);
+  </script>
+</body>
+</html>
